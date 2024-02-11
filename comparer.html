@@ -1,4 +1,5 @@
-<!--Gmail: chaabanimahdi168@gmail.com-->
+ <!-- Gmail:chaabanimahdi168@gmail.com-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +86,7 @@
 						<button class="btn btn-outline-primary" id="helpButton" data-toggle="tooltip" data-placement="bottom" title="Aide">
 							<i class="fas fa-question-circle"></i>
 						</button>
+						 <!-- Bootstrap Modal for Alert -->
 						<div class="modal" id="alertModal" tabindex="-1" role="dialog">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
@@ -95,6 +97,7 @@
 										</button>
 									</div>
 									<div class="modal-body">
+										<!-- Alert messeage content goes here -->
 										Veuillez sélectionner les deux fichiers avant de lancer le check.
 									</div>
 									<div class="modal-footer"> 
@@ -103,6 +106,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- Bootstrap Modal for Invalid File Name Alert -->
 						<div class="modal" id="invalidFileNameModal" tabindex="-1" role="dialog">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
@@ -129,6 +133,8 @@
 					</div>
 				</form>
 				<br>
+
+				<!-- Help Modal -->
 				<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
@@ -139,6 +145,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
+								<!-- Picture Carousel -->
 								<div id="pictureCarousel" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="carousel-item active">
@@ -171,7 +178,10 @@
     <script>
 	
 	$(document).ready(function(){
+        // Initialize tooltip
         $('[data-toggle="tooltip"]').tooltip();
+
+        // Show modal when help button is clicked
         $('#helpButton').click(function(){
             $('#helpModal').modal('show');
         });
@@ -196,11 +206,13 @@
 				$('#alertModal').modal('show');
 		return;
 		}
-
+		
+		 // Check if file names match the specified criteria
         const fileName1 = file1 ? file1.name : "";
         const fileName2 = file2 ? file2.name : "";
 
         if (fileName1 !== "Parc_ADSL.xlsx" || fileName2 !== "VDSL2_Port_Report.xlsx") {
+            // Show Bootstrap alert modal for invalid file names
             $('#invalidFileNameModal').modal('show');
             return; 
         }
@@ -266,11 +278,11 @@
       function displayResults(entries) {
     const resultElement = document.getElementById("result");
 
-
+    // Create export buttons container
     const exportButtonsContainer = document.createElement("div");
     exportButtonsContainer.className = "text-center mb-4"; 
 
-
+    // Create export buttons
     const equalsButton = document.createElement("button");
     equalsButton.textContent = "Export Egale";
     equalsButton.className = "btn btn-success me-2";
@@ -281,10 +293,11 @@
     inequalsButton.className = "btn btn-danger";
     inequalsButton.addEventListener("click", () => exportToTxt(entries.filter((entry) => !entry.isEqual), "inequals.txt"));
 
-
+    // Append buttons to the container
     exportButtonsContainer.appendChild(equalsButton);
     exportButtonsContainer.appendChild(inequalsButton);
 
+    // Add export buttons container above the result element
     resultElement.insertAdjacentElement('beforebegin', exportButtonsContainer);
 
     if (entries.length > 0) {
